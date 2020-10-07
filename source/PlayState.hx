@@ -10,12 +10,14 @@ import flixel.util.FlxSpriteUtil;
 class PlayState extends FlxState
 {
 	var planes:Array<FlxSprite>;
+	var camera2:FlxCamera;
 
 	override public function create()
 	{
 		super.create();
 		bgColor = FlxColor.fromRGB(153, 217, 234);
-		add(new FlxSprite(0, 0, "assets/images/clouds.png"));
+		var clouds = new FlxSprite(0, 0, "assets/images/clouds.png");
+		add(clouds);
 
 		planes = [];
 		var numPlanes = 3;
@@ -43,14 +45,18 @@ class PlayState extends FlxState
 		{
 			FlxSpriteUtil.screenWrap(plane);
 		}
+		if (camera2 != null)
+		{
+			camera2.angle += 0.3;
+		}
 	}
 
 	function createCamera(X:Int, Color:Int, Follow:FlxSprite):Void
 	{
-		var camera:FlxCamera = new FlxCamera(X, 10, Math.floor(FlxG.width / 5), Math.floor(FlxG.height / 5));
-		camera.setScrollBoundsRect(0, 0, FlxG.width, FlxG.height);
-		camera.bgColor = Color;
-		camera.follow(Follow);
-		FlxG.cameras.add(camera);
+		camera2 = new FlxCamera(X, 10, Math.floor(FlxG.width / 5), Math.floor(FlxG.height / 5));
+		camera2.setScrollBoundsRect(0, 0, FlxG.width, FlxG.height);
+		camera2.bgColor = Color;
+		camera2.follow(Follow);
+		FlxG.cameras.add(camera2);
 	}
 }
