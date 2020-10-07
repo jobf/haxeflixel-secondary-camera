@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -27,6 +28,8 @@ class PlayState extends FlxState
 			planes.push(plane);
 			add(plane);
 		}
+
+		createCamera(FlxG.width - Math.floor(FlxG.width / 4), FlxColor.ORANGE, planes[numPlanes - 1]);
 	}
 
 	override public function update(elapsed:Float)
@@ -36,5 +39,14 @@ class PlayState extends FlxState
 		{
 			FlxSpriteUtil.screenWrap(plane);
 		}
+	}
+
+	function createCamera(X:Int, Color:Int, Follow:FlxSprite):Void
+	{
+		var camera:FlxCamera = new FlxCamera(X, 10, Math.floor(FlxG.width / 5), Math.floor(FlxG.height / 5));
+		camera.setScrollBoundsRect(0, 0, FlxG.width, FlxG.height);
+		camera.bgColor = Color;
+		camera.follow(Follow);
+		FlxG.cameras.add(camera);
 	}
 }
