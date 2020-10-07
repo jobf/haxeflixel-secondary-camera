@@ -14,6 +14,8 @@ class PlayState extends FlxState
 	{
 		super.create();
 		bgColor = FlxColor.fromRGB(153, 217, 234);
+		add(new FlxSprite(0, 0, "assets/images/clouds.png"));
+
 		planes = [];
 		var numPlanes = 3;
 		var distribution = FlxG.height / numPlanes;
