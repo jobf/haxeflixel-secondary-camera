@@ -29,7 +29,11 @@ class PlayState extends FlxState
 			add(plane);
 		}
 
-		createCamera(FlxG.width - Math.floor(FlxG.width / 4), FlxColor.ORANGE, planes[numPlanes - 1]);
+		FlxG.camera.target = planes[1];
+
+		var secondTarget = planes[numPlanes - 1];
+		secondTarget.color = FlxColor.LIME;
+		createCamera(FlxG.width - Math.floor(FlxG.width / 4), FlxColor.ORANGE, secondTarget);
 	}
 
 	override public function update(elapsed:Float)
